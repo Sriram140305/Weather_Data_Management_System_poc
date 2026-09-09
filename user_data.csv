@@ -1,0 +1,14 @@
+Type,Username,City,Region,Country,Latitude,Longitude,DateTime,Detail,Value1,Value2,Value3
+SEARCH,admin,Salem,Tamil Nadu,India,11.650000,78.170000,2026-09-09 07:07:27,,,,
+SEARCH,admin,Salem,Tamil Nadu,India,11.650000,78.170000,2026-09-09 07:08:34,,,,
+SEARCH,sriram,Salem,Tamil Nadu,India,11.650000,78.170000,2026-09-09 07:11:32,,,,
+SEARCH,sriram,Salem,Tamil Nadu,India,11.650000,78.170000,2026-09-09 07:11:57,,,,
+SEARCH,sriram,Salem,Tamil Nadu,India,11.650000,78.170000,2026-09-09 07:12:13,,,,
+SEARCH,sriram,Chennai,Tamil Nadu,India,13.080000,80.280000,2026-09-09 07:12:16,,,,
+SEARCH,sriram,Salem,Tamil Nadu,India,11.650000,78.170000,2026-09-09 07:12:39,,,,
+SEARCH,sriram,Salem,Tamil Nadu,India,11.650000,78.170000,2026-09-09 07:13:05,,,,
+SEARCH,sriram,Salem,Tamil Nadu,India,11.650000,78.170000,2026-09-09 07:13:27,,,,
+SEARCH,sriram,Salem,Tamil Nadu,India,11.650000,78.170000,2026-09-09 07:13:48,,,,
+SEARCH,sriram,Chennai,Tamil Nadu,India,13.080000,80.280000,2026-09-09 07:14:34,,,,
+SEARCH,sriram,Salem,Tamil Nadu,India,11.650000,78.170000,2026-09-09 07:43:30,,,,
+WEATHER,sriram,Salem,Tamil Nadu,India,11.650000,78.167000,2026-09-09 07:43:33,Current Weather,23.100000,75.000000,1012.000000

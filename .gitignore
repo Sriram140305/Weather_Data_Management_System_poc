@@ -1,0 +1,13 @@
+# Build
+build/
+*.o
+weather_system
+weather_system.exe
+
+# Runtime data
+user_data.csv
+user_data_backup.csv
+weather_report.csv
+api_config.conf
+alert_thresholds.conf
+*.log
