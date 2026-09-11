@@ -1,6 +1,9 @@
 #include <curl/curl.h>
 #include <nlohmann/json.hpp>
-
+#ifdef _WIN32
+#include <conio.h>
+#include <io.h>
+#endif
 #include "weatherEnhancement.h"
 #include "APIManager.h"
 #include "weather.h"
@@ -891,7 +894,51 @@ namespace
         }
         return true;
     }
+static std::streambuf* originalCinBuffer = std::cin.rdbuf();
 
+string readPassword()
+{
+#ifdef _WIN32
+    // Use hidden keyboard input only when the normal terminal
+    // input stream is being used.
+    if (std::cin.rdbuf() == originalCinBuffer && _isatty(_fileno(stdin)))
+    {
+        string password;
+        int ch;
+
+        while ((ch = _getch()) != '\r')
+        {
+            // Backspace
+            if (ch == '\b')
+            {
+                if (!password.empty())
+                {
+                    password.pop_back();
+                    cout << "\b \b";
+                }
+            }
+            // Ignore special keys
+            else if (ch == 0 || ch == 224)
+            {
+                _getch();
+            }
+            else
+            {
+                password += static_cast<char>(ch);
+                cout << '*';
+            }
+        }
+
+        cout << '\n';
+        return password;
+    }
+#endif
+
+    // GoogleTest / redirected input
+    string password;
+    cin >> password;
+    return password;
+}
     bool validPassword(const string& password)
     {
         return password.size() >= 6 && password.size() <= 128;
@@ -947,9 +994,10 @@ static bool registerAccount(const string& role)
     cout << "Enter Username: ";
     cin >> username;
     cout << "Enter Password: ";
-    cin >> password;
-    cout << "Confirm Password: ";
-    cin >> confirm;
+password = readPassword();
+
+cout << "Confirm Password: ";
+confirm = readPassword();
 
     if (!validUsername(username))
     {
@@ -1001,7 +1049,7 @@ bool WeatherEnhancementManager::loginAsUser()
     cout << "Enter Username: ";
     cin >> username;
     cout << "Enter Password: ";
-    cin >> password;
+password = readPassword();
 
     if (authenticateAccount(username, password, "USER", currentUsername, currentRole))
     {
@@ -1026,7 +1074,7 @@ bool WeatherEnhancementManager::loginAsAdmin()
     cout << "Enter Username: ";
     cin >> username;
     cout << "Enter Password: ";
-    cin >> password;
+password = readPassword();
 
     if (authenticateAccount(username, password, "ADMIN", currentUsername, currentRole))
     {
@@ -1156,9 +1204,10 @@ void WeatherEnhancementManager::userManagement()
                 continue;
             }
             cout << "New Password: ";
-            cin >> newPassword;
-            cout << "Confirm Password: ";
-            cin >> confirm;
+newPassword = readPassword();
+
+cout << "Confirm Password: ";
+confirm= readPassword();
 
             if (!validPassword(newPassword) || newPassword != confirm)
             {
